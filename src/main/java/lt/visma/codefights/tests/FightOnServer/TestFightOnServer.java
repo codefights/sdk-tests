@@ -1,17 +1,16 @@
-package main.java.lt.visma.codefights.tests.FightBot;
+package main.java.lt.visma.codefights.tests.FightOnServer;
+
+import static org.junit.Assert.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.Arrays;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TestFightBot {
-
+public class TestFightOnServer {
 	Process p;
 	PrintWriter stdin;
 	public static String startText;
@@ -30,19 +29,19 @@ public class TestFightBot {
 	
 	@Test
 	public void testingFightBoxer() throws IOException {
+			stdin.println("YOUR-SCORE 10 OPPONENT-SCORE 10 ENEMY-MOVE bnbnbn");
+			stdin.println("YOUR-SCORE 10 OPPONENT-SCORE 10 ENEMY-MOVE ajajaj");
 		    stdin.close();
 		    
 		    BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
-		    String[] lines = new String[100];
 		    
-		    for (int i = 0; i < 100;i++) {				
-				lines[i] = in.readLine();
-				if (lines[i] == null) {
-					break;
-				}
+		    for (int i = 0; i < 5;i++) {				
+				in.readLine();
 		    }		    	
 		    
-		    Assert.assertTrue(Arrays.asList(lines).contains("FIGHT OVER"));
-		    Assert.assertTrue(Arrays.asList(lines).contains("THE WINNER IS boxer"));
+			String line = in.readLine();
+			assertEquals("Should be equal", "an", line);
+			assertEquals("Should be equal", "bnbnbn", in.readLine());
+			assertEquals("Should be equal", "ajajaj", in.readLine());
 	}
 }

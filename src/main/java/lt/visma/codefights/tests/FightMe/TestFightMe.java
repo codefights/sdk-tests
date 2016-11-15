@@ -1,5 +1,6 @@
 package main.java.lt.visma.codefights.tests.FightMe;
 
+import java.awt.AWTException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,6 +8,9 @@ import java.io.PrintWriter;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertTrue;
+
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.containsString;
 
@@ -32,7 +36,7 @@ public class TestFightMe {
 	public void testingAttackNose() throws IOException {
 		    stdin.println("AN");
 		    stdin.close();
-
+		    System.out.println("asdf");
 		    assertPrintedInfoIsCorrect(": You attacked NOSE(+),  scoring 10  and was NOT defending at all.");
 	}
 	
@@ -158,7 +162,7 @@ public class TestFightMe {
 				in.readLine();
 		    }		    	
 		    
-		    assertEquals("Should be equal", "You vs Your bot: 80 to -18", in.readLine());
+		    assertEquals("Should be equal", "You vs Your bot: -4 to -18", in.readLine());
 		    in.readLine();//empty line
 			assertEquals("Should be equal", "FIGHT OVER", in.readLine());
 			assertThat(in.readLine(), containsString("THE WINNER IS You"));
@@ -173,11 +177,10 @@ public class TestFightMe {
 		in.readLine();
 		in.readLine();
 		//end
-
 		String line = in.readLine();
-		assertThat(line, containsString("Make your move by (A)ttacking and (B)locking (N)ose, (J)aw, (B)elly, (G)roin, (L)egs"));
-		assertThat(line, containsString("(for example, BN BB AN)"));
-		assertThat(line, containsString(text));
-	}
 
+		assertTrue(line.contains("Make your move by (A)ttacking and (B)locking (N)ose, (J)aw, (B)elly, (G)roin, (L)egs"));		
+		assertTrue(line.contains("(for example, BN BB AN)"));
+		assertTrue(line.contains(text));
+	}
 }

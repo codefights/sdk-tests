@@ -9,3 +9,6 @@ for testing .net sdk: java -jar [runnable jar name].jar [sdk filename].exe
 for testing python sdk: java -jar [runnable jar name].jar python [filename].py
 
 for testing php sdk: java -jar [runnable jar name].jar php [filename].php
+
+
+Note for test fighter: it first move is just attack Nose, other moves are opponents last moves.
